@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     //base values for PlayerMovement
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private PlayerType input;
-    [SerializeField] private AbilityDecorator deco;
     //derived values from ScriptableObject
     private float xforce;
     private float yforce;
@@ -24,15 +23,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerType type = Instantiate(input);
-        AbilityDecorator a = Instantiate(deco);
-        xforce = type.xforce;
-        yforce = type.yforce;
-        jumpBuffer = type.jumpBuffer;
-        dampSpeed = type.dampSpeed;
-        OnPassive += a.MoveSkill;
-        OnPassive += a.InheritedSkill;
-        OnPassive.Invoke();
+        GetCharacterStatistics(input);
     }
 
     // Update is called once per frame
@@ -89,5 +80,17 @@ public class PlayerMovement : MonoBehaviour
         {
             input.MainSkill(input.charType);
         }
+    }
+
+    public void GetCharacterStatistics(PlayerType input)
+    {
+        PlayerType type = Instantiate(input);
+        OnPassive += type.MoveSkill;
+        OnPassive += type.InheritedSkill;
+        OnPassive.Invoke();
+        xforce = type.xforce;
+        yforce = type.yforce;
+        jumpBuffer = type.jumpBuffer;
+        dampSpeed = type.dampSpeed;
     }
 }
