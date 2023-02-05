@@ -14,7 +14,7 @@ public enum Trait
 }
 
 [CreateAssetMenu(fileName = "New Player", menuName = "Player/Empty Player")]
-public class PlayerType : ScriptableObject, IAbilities
+public class PlayerType : ScriptableObject
 {
     public int health;
     [HideInInspector] public Char charType;
@@ -26,12 +26,7 @@ public class PlayerType : ScriptableObject, IAbilities
     [HideInInspector] public Trait trait;
     [HideInInspector] public List<Trait> Inheritable = new List<Trait>();
 
-<<<<<<< Updated upstream
-    protected IAbilities _abilities;
 
-    public PlayerType(IAbilities abilities) => _abilities = abilities;
-
-=======
     
     public void setCharType()
     {
@@ -44,7 +39,7 @@ public class PlayerType : ScriptableObject, IAbilities
             default: break;
         }
     }
->>>>>>> Stashed changes
+
     public virtual void MainSkill(Char charType)
     {
         
@@ -59,11 +54,6 @@ public class PlayerType : ScriptableObject, IAbilities
 
     public virtual void MoveSkill()
     {
-<<<<<<< Updated upstream
-        Debug.Log("b");
-        AbilityDecorator a = new AbilityDecorator(this);
-        a.MoveSkill();
-=======
         int num = UnityEngine.Random.Range(0, 9);
         switch((Trait) num)
         {
@@ -78,16 +68,10 @@ public class PlayerType : ScriptableObject, IAbilities
             case Trait.PACIFIST: trait = Trait.PACIFIST; Debug.Log(trait); damage = damage * 0; break;
             default: break;
         }
->>>>>>> Stashed changes
     }
 
     public virtual void InheritedSkill()
     {
-<<<<<<< Updated upstream
-        Debug.Log("c");
-        AbilityDecorator a = new AbilityDecorator(this);
-        a.InheritedSkill();
-=======
         if(Inheritable.Count > 0)
         {
             int num = UnityEngine.Random.Range(0, Inheritable.Count);
@@ -105,6 +89,5 @@ public class PlayerType : ScriptableObject, IAbilities
                 default: break;
             }
         }
->>>>>>> Stashed changes
     }
 }
