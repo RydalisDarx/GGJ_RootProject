@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bafbfce14e2e2224da6d5836ca40406a, type: 3}
-  m_Name: me
+  m_Name: Player
   m_EditorClassIdentifier: 
   health: 100
   charType: 0
-  xforce: 2
-  yforce: 2
+  xforce: 5
+  yforce: 8
   jumpBuffer: 0.1
-  dampSpeed: 0.5
-  damage: 0
+  dampSpeed: -0.5
+  damage: 10
+  traits: 0100000004000000
+  Inheritable: 010000000400000007000000

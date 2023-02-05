@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-
-    public PlayerType playerStats;
+    public PlayerType based;
+    public PlayerType player;
 
     public int currentHealth;
 
@@ -14,20 +16,33 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = playerStats.health;
-        healthBar.SetMaxHealth(playerStats.health);
+        currentHealth = player.health;
+        healthBar.SetMaxHealth(currentHealth);
+        healthBar.SetHealth(currentHealth);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Death();
+        }
+    }
+
+    public void Death()
+    {
+        based.DeathInherit(player);
+        player.health = 0;
+        RestartGame();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(2);
     }
 }

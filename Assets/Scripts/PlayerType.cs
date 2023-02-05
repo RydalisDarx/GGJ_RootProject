@@ -23,8 +23,8 @@ public class PlayerType : ScriptableObject
     public float jumpBuffer;
     public float dampSpeed;
     public float damage;
-    [HideInInspector] public Trait trait;
-    [HideInInspector] public List<Trait> Inheritable = new List<Trait>();
+    public List<Trait> traits = new List<Trait>();
+    public List<Trait> Inheritable = new List<Trait>();
 
 
     
@@ -33,9 +33,9 @@ public class PlayerType : ScriptableObject
         int num = UnityEngine.Random.Range(0, 2);
         switch(num)
         {
-            case 0: charType = Char.CARROT; Debug.Log(charType); break;
-            case 1: charType = Char.POTATO; Debug.Log(charType); break;
-            case 2: charType = Char.TURNIP; Debug.Log(charType); break;
+            case 0: charType = Char.CARROT; break;
+            case 1: charType = Char.POTATO; break;
+            case 2: charType = Char.TURNIP; break;
             default: break;
         }
     }
@@ -52,20 +52,46 @@ public class PlayerType : ScriptableObject
         }
     }
 
+    public virtual void GenerateSkills()
+    {
+        MoveSkill();
+        InheritedSkill();
+    }
+
+    public virtual void ApplyPassives()
+    {
+        for (int i = 0; i < traits.Count; i++)
+        {
+            switch(traits[i])
+            {
+                case Trait.QUICK: xforce = xforce + 3; break;
+                case Trait.JUMPY: yforce = yforce + 3; break;
+                case Trait.FORGIVING: jumpBuffer = jumpBuffer + 0.2f; break;
+                case Trait.LIGHT: dampSpeed = dampSpeed - 0.2f; break;
+                case Trait.HEAVY: dampSpeed = dampSpeed * -1; break;
+                case Trait.BRUTAL: damage = damage * 2; break;
+                case Trait.HEALTHY: health = health + 100; break;
+                case Trait.FRAGILE: health = health - 50; break;
+                case Trait.PACIFIST: damage = damage * 0; break;
+                default: break;
+            }
+        }
+    }
+
     public virtual void MoveSkill()
     {
         int num = UnityEngine.Random.Range(0, 9);
         switch((Trait) num)
         {
-            case Trait.QUICK: trait = Trait.QUICK; Debug.Log(trait); xforce = xforce + 3; break;
-            case Trait.JUMPY: trait = Trait.JUMPY; Debug.Log(trait); yforce = yforce + 3; break;
-            case Trait.FORGIVING: trait = Trait.FORGIVING; Debug.Log(trait); jumpBuffer = jumpBuffer + 0.2f; break;
-            case Trait.LIGHT: trait = Trait.LIGHT; Debug.Log(trait); dampSpeed = dampSpeed - 0.2f; break;
-            case Trait.HEAVY: trait = Trait.HEAVY; Debug.Log(trait); dampSpeed = dampSpeed * -1; break;
-            case Trait.BRUTAL: trait = Trait.BRUTAL; Debug.Log(trait); damage = damage * 2; break;
-            case Trait.HEALTHY: trait = Trait.HEALTHY; Debug.Log(trait); health = health + 100; break;
-            case Trait.FRAGILE: trait = Trait.FRAGILE; Debug.Log(trait); health = health - 50; break;
-            case Trait.PACIFIST: trait = Trait.PACIFIST; Debug.Log(trait); damage = damage * 0; break;
+            case Trait.QUICK: traits.Add(Trait.QUICK); break;
+            case Trait.JUMPY: traits.Add(Trait.JUMPY); break;
+            case Trait.FORGIVING: traits.Add(Trait.FORGIVING); break;
+            case Trait.LIGHT: traits.Add(Trait.LIGHT); break;
+            case Trait.HEAVY: traits.Add(Trait.HEAVY); break;
+            case Trait.BRUTAL: traits.Add(Trait.BRUTAL); break;
+            case Trait.HEALTHY: traits.Add(Trait.HEALTHY); break;
+            case Trait.FRAGILE: traits.Add(Trait.FRAGILE); break;
+            case Trait.PACIFIST: traits.Add(Trait.PACIFIST); break;
             default: break;
         }
     }
@@ -77,17 +103,25 @@ public class PlayerType : ScriptableObject
             int num = UnityEngine.Random.Range(0, Inheritable.Count);
             switch (Inheritable[num])
             {
-                case Trait.QUICK: trait = Trait.QUICK; Debug.Log(trait); xforce = xforce + 3; break;
-                case Trait.JUMPY: trait = Trait.JUMPY; Debug.Log(trait); yforce = yforce + 3; break;
-                case Trait.FORGIVING: trait = Trait.FORGIVING; Debug.Log(trait); jumpBuffer = jumpBuffer + 1f; break;
-                case Trait.LIGHT: trait = Trait.LIGHT; Debug.Log(trait); dampSpeed = 1; break;
-                case Trait.HEAVY: trait = Trait.HEAVY; Debug.Log(trait); dampSpeed = 0; break;
-                case Trait.BRUTAL: trait = Trait.BRUTAL; Debug.Log(trait); damage = damage * 2; break;
-                case Trait.HEALTHY: trait = Trait.HEALTHY; Debug.Log(trait); health = health + 100; break;
-                case Trait.FRAGILE: trait = Trait.FRAGILE; Debug.Log(trait); health = health - 50; break;
-                case Trait.PACIFIST: trait = Trait.PACIFIST; Debug.Log(trait); damage = damage * 0; break;
+                case Trait.QUICK: traits.Add(Trait.QUICK); break;
+                case Trait.JUMPY: traits.Add(Trait.JUMPY); break;
+                case Trait.FORGIVING: traits.Add(Trait.FORGIVING); break;
+                case Trait.LIGHT: traits.Add(Trait.LIGHT); break;
+                case Trait.HEAVY: traits.Add(Trait.HEAVY); break;
+                case Trait.BRUTAL: traits.Add(Trait.BRUTAL); break;
+                case Trait.HEALTHY: traits.Add(Trait.HEALTHY); break;
+                case Trait.FRAGILE: traits.Add(Trait.FRAGILE); break;
+                case Trait.PACIFIST: traits.Add(Trait.PACIFIST); break;
                 default: break;
             }
+        }
+    }
+
+    public void DeathInherit(PlayerType type)
+    {
+        if (!Inheritable.Contains(type.traits[0]))
+        {
+            Inheritable.Add(type.traits[0]);
         }
     }
 }
