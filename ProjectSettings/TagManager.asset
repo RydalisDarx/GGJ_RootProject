@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - Eulogy
   - Ancestor
+  - GameOver
+  - Damage
+  - Binding
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX

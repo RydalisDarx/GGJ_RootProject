@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   charType: 0
-  xforce: 5
-  yforce: 5
+  xforce: 6
+  yforce: 8
   jumpBuffer: 0.1
   dampSpeed: 0.5
   damage: 10
   traits: 
-  Inheritable: 010000000400000007000000
+  Inheritable: 040000000300000006000000080000000500000001000000

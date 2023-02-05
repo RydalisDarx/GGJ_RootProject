@@ -17,7 +17,7 @@ public enum Trait
 public class PlayerType : ScriptableObject
 {
     public int health;
-    [HideInInspector] public Char charType;
+    public Char charType;
     public float xforce;
     public float yforce;
     public float jumpBuffer;
@@ -70,9 +70,9 @@ public class PlayerType : ScriptableObject
                 case Trait.LIGHT: dampSpeed = dampSpeed - 0.2f; break;
                 case Trait.HEAVY: dampSpeed = dampSpeed * -1; break;
                 case Trait.BRUTAL: damage = damage * 2; break;
-                case Trait.HEALTHY: health = health + 100; break;
-                case Trait.FRAGILE: health = health - 50; break;
-                case Trait.PACIFIST: damage = damage * 0; break;
+                case Trait.HEALTHY: health = health * 2; break;
+                case Trait.FRAGILE: health = health / 2; break;
+                case Trait.PACIFIST: damage = 1; break;
                 default: break;
             }
         }

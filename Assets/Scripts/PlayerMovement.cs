@@ -11,6 +11,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerType based;
     [SerializeField] private PlayerType player;
     [SerializeField] private PlayerHealth health;
+    [SerializeField] private GameObject killBox;
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private GameObject mine;
+    [SerializeField] private GameObject martial;
+    [SerializeField] private GameObject offset;
     //derived values from ScriptableObject
     private float xforce;
     private float yforce;
@@ -45,7 +50,21 @@ public class PlayerMovement : MonoBehaviour
         UseSkills();
     }
 
-    public void HorizontalMovement()
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "GameOver")
+        {
+            Debug.Log("death");
+            health.Death();
+        }
+
+        if(collision.tag == "Damage")
+        {
+            health.TakeDamage(20);
+        }
+    }
+
+        public void HorizontalMovement()
     {
         //Moving along x axis
         xI = Input.GetAxis("Horizontal");
@@ -66,6 +85,8 @@ public class PlayerMovement : MonoBehaviour
         { //not moving
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
+
+        killBox.transform.position = new Vector2(transform.position.x, killBox.transform.position.y);
     }
 
     public void Jumping()
@@ -89,7 +110,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E))
         {
-            player.MainSkill(player.charType);
+            switch (player.charType)
+            {
+                case Char.CARROT: Instantiate(projectile, offset.transform.position, transform.rotation); break;
+                case Char.TURNIP: Instantiate(mine, offset.transform.position, transform.rotation); break;
+                default: Instantiate(martial, offset.transform.position, transform.rotation); break;
+            }
+            
         }
     }
 
