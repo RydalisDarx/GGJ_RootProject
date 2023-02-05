@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, yforce); //Player jump mechanic
         }
-        if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y != 0)
+        if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * dampSpeed);
         }
@@ -90,4 +90,23 @@ public class PlayerMovement : MonoBehaviour
             input.MainSkill(input.charType);
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    public void GetCharacterStatistics(PlayerType input)
+    {
+        PlayerType type = Instantiate(input);
+        OnPassive += input.setCharType;
+        OnPassive += type.MoveSkill;
+        OnPassive += type.InheritedSkill;
+        OnPassive.Invoke();
+        OnPassive -= input.setCharType;
+        OnPassive -= type.MoveSkill;
+        OnPassive -= type.InheritedSkill;
+        xforce = type.xforce;
+        yforce = type.yforce;
+        jumpBuffer = type.jumpBuffer;
+        dampSpeed = type.dampSpeed;
+    }
+>>>>>>> Stashed changes
 }
