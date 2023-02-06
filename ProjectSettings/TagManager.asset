@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Eulogy
+  - Ancestor
+  - GameOver
+  - Damage
+  - Binding
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX

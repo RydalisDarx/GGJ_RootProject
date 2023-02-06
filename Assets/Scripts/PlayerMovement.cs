@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
     //base values for PlayerMovement
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private PlayerType input;
+    [SerializeField] private PlayerType based;
+    [SerializeField] private PlayerType player;
+    [SerializeField] private PlayerHealth health;
+    [SerializeField] private GameObject killBox;
+    [SerializeField] private GameObject projectile;
+    [SerializeField] private GameObject mine;
+    [SerializeField] private GameObject martial;
+    [SerializeField] private GameObject offset;
     //derived values from ScriptableObject
     private float xforce;
     private float yforce;
@@ -18,12 +26,20 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer; //specify layer "ground"
     private bool surfaced;
-    public Action OnPassive;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        GetCharacterStatistics(input);
+        if(player.health == 0)
+        {
+            CopyFromBaseStats();
+            player.GenerateSkills();
+            player.ApplyPassives();
+        }
+        health.player = player;
+        xforce = player.xforce;
+        yforce = player.yforce;
+        jumpBuffer = player.jumpBuffer;
+        dampSpeed = player.dampSpeed;
     }
 
     // Update is called once per frame
@@ -34,7 +50,21 @@ public class PlayerMovement : MonoBehaviour
         UseSkills();
     }
 
-    public void HorizontalMovement()
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "GameOver")
+        {
+            Debug.Log("death");
+            health.Death();
+        }
+
+        if(collision.tag == "Damage")
+        {
+            health.TakeDamage(20);
+        }
+    }
+
+        public void HorizontalMovement()
     {
         //Moving along x axis
         xI = Input.GetAxis("Horizontal");
@@ -55,6 +85,8 @@ public class PlayerMovement : MonoBehaviour
         { //not moving
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
+
+        killBox.transform.position = new Vector2(transform.position.x, killBox.transform.position.y);
     }
 
     public void Jumping()
@@ -78,23 +110,26 @@ public class PlayerMovement : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E))
         {
-            input.MainSkill(input.charType);
+            switch (player.charType)
+            {
+                case Char.CARROT: Instantiate(projectile, offset.transform.position, transform.rotation); break;
+                case Char.TURNIP: Instantiate(mine, offset.transform.position, transform.rotation); break;
+                default: Instantiate(martial, offset.transform.position, transform.rotation); break;
+            }
+            
         }
     }
- 
-    public void GetCharacterStatistics(PlayerType input)
+
+    public void CopyFromBaseStats()
     {
-        PlayerType type = Instantiate(input);
-        OnPassive += input.setCharType;
-        OnPassive += type.MoveSkill;
-        OnPassive += type.InheritedSkill;
-        OnPassive.Invoke();
-        OnPassive -= input.setCharType;
-        OnPassive -= type.MoveSkill;
-        OnPassive -= type.InheritedSkill;
-        xforce = type.xforce;
-        yforce = type.yforce;
-        jumpBuffer = type.jumpBuffer;
-        dampSpeed = type.dampSpeed;
+        player.health = based.health;
+        player.charType = based.charType;
+        player.xforce = based.xforce;
+        player.yforce = based.yforce;
+        player.jumpBuffer = based.jumpBuffer;
+        player.dampSpeed = based.dampSpeed;
+        player.damage = based.damage;
+        player.traits.RemoveAll(t => t >= (Trait) 0);
+        player.Inheritable = new List<Trait>(based.Inheritable);
     }
 }
