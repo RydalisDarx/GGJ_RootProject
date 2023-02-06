@@ -4,21 +4,25 @@ using UnityEngine;
 using System;
 
 public class FamilyTreeMenu : MonoBehaviour
-{
-    [SerializeField] public PlayerType playerProperties;
-    
+{  
     [HideInInspector] private GameObject[] portraitLocations;
     [HideInInspector] private Transform ancestorPortrait;
 
     [SerializeField] private GameObject[] portraits;
     [SerializeField] private GameObject familyParent;
 
+    public FamilyHolder familyMenu;
+
     public Action OnPassive;
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
+        FamilyHolder familyList = Instantiate(familyMenu);
 
+        foreach (PlayerType record in familyList.players)
+        {
+            FillVacantGrave(record);
+        }
     }
 
     public bool CheckFirstDeath()
@@ -32,7 +36,7 @@ public class FamilyTreeMenu : MonoBehaviour
         
     }
 
-    public void FillVacantGrave()
+    public void FillVacantGrave(PlayerType playerProperties)
     {
         if (CheckFirstDeath())
         {
@@ -60,18 +64,4 @@ public class FamilyTreeMenu : MonoBehaviour
         }
 
     }
-
-    //Instantiates PlayerType for the sake of testing 
-    public void GetCharacterStatistics(PlayerType playerProperties)
-    {
-        PlayerType type = Instantiate(playerProperties);
-        OnPassive += playerProperties.setCharType;
-        OnPassive += type.MoveSkill;
-        OnPassive += type.InheritedSkill;
-        OnPassive.Invoke();
-        OnPassive -= playerProperties.setCharType;
-        OnPassive -= type.MoveSkill;
-        OnPassive -= type.InheritedSkill;
-    }
-
 }

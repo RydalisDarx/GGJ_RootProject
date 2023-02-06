@@ -13,6 +13,8 @@ public class PlayerHealth : MonoBehaviour
 
     public HealthBar healthBar;
 
+    public FamilyHolder familyMenu;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,6 @@ public class PlayerHealth : MonoBehaviour
         healthBar.SetMaxHealth(currentHealth);
         healthBar.SetHealth(currentHealth);
     }
-
 
     public void TakeDamage(int damage)
     {
@@ -38,11 +39,12 @@ public class PlayerHealth : MonoBehaviour
     {
         based.DeathInherit(player);
         player.health = 0;
+        familyMenu.players.Add(Instantiate(player));
         RestartGame();
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
