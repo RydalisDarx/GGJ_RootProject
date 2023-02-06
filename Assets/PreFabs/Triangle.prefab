@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7221765065721471608}
   - component: {fileID: 8916947942982150268}
   - component: {fileID: 8376348884071425488}
+  - component: {fileID: 3253938385152383286}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -110,7 +111,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e0aa9a26c609254bbca9c31843db551, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -167,6 +168,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  animHandler: {fileID: 3253938385152383286}
 --- !u!114 &8916947942982150268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,9 +198,38 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0059691668, y: 0.17153892}
-  m_Size: {x: 0.8766372, y: 0.92041117}
+  m_Offset: {x: -0.0059691668, y: -0.23270625}
+  m_Size: {x: 1.114929, y: 1.660818}
   m_Direction: 0
+--- !u!114 &3253938385152383286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5096646063939797162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130617136fefdec4a91a9d1c72d6f531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSprites:
+  - {fileID: -885445331, guid: 17100550257f9574b8a36dafd270e242, type: 3}
+  - {fileID: -1792511962, guid: 345cb3ee51fd41c40b46af3351dc62c1, type: 3}
+  - {fileID: 21300000, guid: c9219f4926a2d9146a38a8f4d45d3082, type: 3}
+  - {fileID: 21300000, guid: e917e8ad1ab170b44a54b1da95047c37, type: 3}
+  - {fileID: 371436100, guid: 2a165f92a342e4f4b89f6b020ad6193e, type: 3}
+  - {fileID: 2104500963, guid: ac1eda5631553bf4b982113390592bb5, type: 3}
+  - {fileID: 21300000, guid: 6a230a1f2ab197e43a85becaa40337af, type: 3}
+  - {fileID: 21300000, guid: 0e0aa9a26c609254bbca9c31843db551, type: 3}
+  - {fileID: -490972774, guid: f0d2ad32eb0d59341903a73be16e9ea1, type: 3}
+  - {fileID: 299622105, guid: 2f070c56708f37342bdf909dd51626b7, type: 3}
+  playerIdle: {fileID: 0}
+  playerRunning: {fileID: 0}
+  playerJumping: {fileID: 0}
+  playerAttack: {fileID: 0}
+  player: {fileID: 11400000, guid: faf04aab8c3e67d43b4a0f03ca5716af, type: 2}
+  currentSprite: {fileID: 0}
 --- !u!1 &6695580452812847029
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6695580452812847029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.281, z: 0}
+  m_LocalPosition: {x: 0, y: -1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

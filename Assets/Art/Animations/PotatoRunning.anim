@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CarrotRunning
+  m_Name: PotatoRunning
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,9 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -1792511962, guid: 345cb3ee51fd41c40b46af3351dc62c1, type: 3}
+      value: {fileID: 371436100, guid: 2a165f92a342e4f4b89f6b020ad6193e, type: 3}
     - time: 0.083333336
-      value: {fileID: -1251756828, guid: 345cb3ee51fd41c40b46af3351dc62c1, type: 3}
+      value: {fileID: -1967898352, guid: 2a165f92a342e4f4b89f6b020ad6193e, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
