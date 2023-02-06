@@ -1613,6 +1613,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 950579275}
+    - target: {fileID: 8916947942982150268, guid: c729f5762e7a8c843864b63ac612ce99, type: 3}
+      propertyPath: familyMenu
+      value: 
+      objectReference: {fileID: 11400000, guid: c615a1dfd29c52c40a9acb8d3752d869, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c729f5762e7a8c843864b63ac612ce99, type: 3}
 --- !u!1 &662537893
@@ -10426,6 +10430,10 @@ PrefabInstance:
       propertyPath: health
       value: 
       objectReference: {fileID: 1179256972}
+    - target: {fileID: 6271245994048462713, guid: 372708aa4d5c7e440b6335481fcc8c68, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1179256970}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 372708aa4d5c7e440b6335481fcc8c68, type: 3}
 --- !u!1001 &6610517778995250894
