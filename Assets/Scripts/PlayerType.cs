@@ -26,11 +26,9 @@ public class PlayerType : ScriptableObject
     public List<Trait> traits = new List<Trait>();
     public List<Trait> Inheritable = new List<Trait>();
 
-
-    
     public void setCharType()
     {
-        int num = UnityEngine.Random.Range(0, 2);
+        int num = UnityEngine.Random.Range(0, 3);
         switch(num)
         {
             case 0: charType = Char.CARROT; break;

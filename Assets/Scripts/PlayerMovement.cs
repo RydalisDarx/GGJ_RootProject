@@ -26,12 +26,15 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public LayerMask groundLayer; //specify layer "ground"
     private bool surfaced;
+    //reference to CharAnimHandler methods
+    [SerializeField] public CharAnimHandler animHandler;
 
     void Awake()
     {
         if(player.health == 0)
         {
             CopyFromBaseStats();
+            player.setCharType();
             player.GenerateSkills();
             player.ApplyPassives();
         }
@@ -73,16 +76,19 @@ public class PlayerMovement : MonoBehaviour
         //Moving left or right on x axis
         if (xI > 0f)
         {
+            animHandler.SetRunning();
             rb.velocity = new Vector2(xI * xforce, rb.velocity.y);
             transform.localScale = new Vector2(1.047133f, 0.9223106f);
         }
         else if (xI < 0f)
         {
+            animHandler.SetRunning();
             rb.velocity = new Vector2(xI * xforce, rb.velocity.y);
             transform.localScale = new Vector2(-1.047133f, 0.9223106f); //Flip player sprite
         }
         else
         { //not moving
+            animHandler.SetIdle();
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
@@ -98,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
         //If both are true, the player jumps
         if (Input.GetKeyDown(KeyCode.Space) && surfaced)
         {
+            animHandler.SetJumping();
             rb.velocity = new Vector2(rb.velocity.x, yforce); //Player jump mechanic
         }
         if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0)
@@ -112,8 +119,8 @@ public class PlayerMovement : MonoBehaviour
         {
             switch (player.charType)
             {
-                case Char.CARROT: Instantiate(projectile, offset.transform.position, transform.rotation); break;
-                case Char.TURNIP: Instantiate(mine, offset.transform.position, transform.rotation); break;
+                case Char.CARROT: animHandler.SetAttack(); Instantiate(projectile, offset.transform.position, transform.rotation); break;
+                case Char.TURNIP: animHandler.SetAttack(); Instantiate(mine, offset.transform.position, transform.rotation); break;
                 default: Instantiate(martial, offset.transform.position, transform.rotation); break;
             }
             

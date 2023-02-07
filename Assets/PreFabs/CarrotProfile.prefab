@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c45de4c085d6e4fbef652f1b9e26d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerProperties: {fileID: 11400000, guid: faf04aab8c3e67d43b4a0f03ca5716af, type: 2}
+  player: {fileID: 11400000, guid: faf04aab8c3e67d43b4a0f03ca5716af, type: 2}
   traitsText: {fileID: 520088451}
 --- !u!1 &8736137143744854691
 GameObject:

@@ -168,12 +168,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0922a77c214e743a3315169abeceb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerProperties: {fileID: 11400000, guid: faf04aab8c3e67d43b4a0f03ca5716af, type: 2}
   portraits:
   - {fileID: 8736137143630734472, guid: 7ddbdf70c98c88b4f94ad02ef8de11bd, type: 3}
   - {fileID: 3146435149685609258, guid: d60ba724310d31749947b7071278d992, type: 3}
   - {fileID: 1383488469777929978, guid: 2076d3af234f54f42ba5461cf338770c, type: 3}
   familyParent: {fileID: 202306335}
+  familyMenu: {fileID: 11400000, guid: c615a1dfd29c52c40a9acb8d3752d869, type: 2}
 --- !u!1 &213004308
 GameObject:
   m_ObjectHideFlags: 0
